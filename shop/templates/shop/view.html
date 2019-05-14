@@ -1,0 +1,52 @@
+{% extends 'shop/base.html' %}
+
+
+
+{% block body %}
+<div class='container'>
+	<div class='row'>
+		<div class='col-4'>
+			<img src='\media\{{product.product_img}}' width="100%" height="100%" >
+		</div>
+		<div class='col-8'>
+			<h2>{{ product.product_name }}</h2>
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block js %}
+
+<script type="text/javascript">
+	if(localStorage.getItem('cart') == null){
+		var cart = {};
+	}
+	else{
+		cart =JSON.parse(localStorage.getItem('cart'));
+		document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+	}
+$('.cart').click(function(){
+	var idstr = this.id.toString();
+	if (cart[idstr] != undefined){
+		cart[idstr] = cart[idstr] + 1;
+	}
+	else {
+		cart[idstr] = 1;
+	}
+	localStorage.setItem('cart', JSON.stringify(cart));
+	console.log(cart);
+	document.getElementById('cart').innerHTML = Object.keys(cart).length;
+}
+)
+
+</script>
+
+
+
+{% endblock %}
